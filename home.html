@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MONEYCRADLE</title>
+</head>
+<style>
+    @font-face {
+        font-family: 'Miesz';
+        /*a name to be used later*/
+        src: url('assets/mieszkanie9.otf');
+        /*URL to font*/
+    }
+
+    body {
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: Miesz;
+        overflow: hidden;
+    }
+
+    .menu-wrapper {
+        position: relative;
+        width: 600px;
+        height: 400px;
+    }
+
+    .menu-wrapper a {
+        font-size: 50px;
+        color: #72f1ff;
+        text-shadow: rgba(0, 255, 213, 0.9) 0px 0px 16px;
+    }
+
+    .arrow {
+        position: absolute;
+        width: 150px;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%) rotate(0deg);
+        transform-origin: 50% 50%;
+        transition: transform 0.3s ease-out;
+        z-index: 10;
+    }
+
+    .menu-link {
+        position: absolute;
+        transform: translate(-50%, -50%);
+        text-decoration: none;
+        transition: 0.2s;
+    }
+
+    .menu-link:hover {
+        color: rgb(255, 242, 0);
+        text-shadow: 0 0 10px rgb(234, 255, 0);
+        cursor:grab;
+    }
+</style>
+
+<body>
+
+    <div class="menu-wrapper">
+
+        <img class="arrow" src="assets/arrow.png">
+
+        <a class="menu-link" data-rotate="-60" style="left: 50%; top: 10%;">Writing</a>
+        <a class="menu-link" data-rotate="-20" style="left: 85%; top: 30%;">Graphics</a>
+        <a class="menu-link" data-rotate="20" style="left: 85%; top: 70%;">Cliques</a>
+        <a class="menu-link" data-rotate="60" style="left: 50%; top: 90%;">Links</a>
+        <a class="menu-link" data-rotate="140" style="left: 15%; top: 70%;">Webrings</a>
+        <a class="menu-link" data-rotate="200" style="left: 15%; top: 30%;">Shrines</a>
+
+    </div>
+
+    <script>
+        const arrow = document.querySelector('.arrow');
+        let currentRotation = 0;
+
+        document.querySelectorAll('.menu-link').forEach(link => {
+            link.addEventListener('mouseenter', () => {
+                let target = parseInt(link.getAttribute('data-rotate'));
+
+                let delta = target - currentRotation;
+
+                if (delta > 180) delta -= 360;
+                if (delta < -180) delta += 360;
+
+                currentRotation += delta;
+
+                arrow.style.transform =
+                    `translate(-50%, -50%) rotate(${currentRotation}deg)`;
+            });
+        });
+
+    </script>
+
+</html>
